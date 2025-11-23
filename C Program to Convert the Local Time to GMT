@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+    time_t now;
+    struct tm *localTime, *gmtTime;
+
+    time(&now);
+
+    localTime = localtime(&now);
+
+    gmtTime = gmtime(&now);
+
+    printf("Local Time:\n");
+    printf("%02d-%02d-%04d  %02d:%02d:%02d\n",
+           localTime->tm_mday,
+           localTime->tm_mon + 1,
+           localTime->tm_year + 1900,
+           localTime->tm_hour,
+           localTime->tm_min,
+           localTime->tm_sec);
+
+    printf("\nGMT / UTC Time:\n");
+    printf("%02d-%02d-%04d  %02d:%02d:%02d\n",
+           gmtTime->tm_mday,
+           gmtTime->tm_mon + 1,
+           gmtTime->tm_year + 1900,
+           gmtTime->tm_hour,
+           gmtTime->tm_min,
+           gmtTime->tm_sec);
+
+    return 0;
+}
