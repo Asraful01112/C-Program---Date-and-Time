@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    int hour, min, sec;
+
+    printf("Enter time in 24-hour format (HH MM SS): ");
+    scanf("%d %d %d", &hour, &min, &sec);
+
+    if (hour < 0 || hour > 23 || min < 0 || min > 59 || sec < 0 || sec > 59) {
+        printf("Invalid time format!\n");
+        return 1;
+    }
+
+    char period[3];
+    if (hour == 0) {
+        hour = 12;
+        snprintf(period, sizeof(period), "AM");
+    } 
+    else if (hour == 12) {
+        snprintf(period, sizeof(period), "PM");
+    } 
+    else if (hour > 12) {
+        hour -= 12;
+        snprintf(period, sizeof(period), "PM");
+    } 
+    else {
+        snprintf(period, sizeof(period), "AM");
+    }
+
+    printf("Time in AM-PM format: %02d:%02d:%02d %s\n", hour, min, sec, period);
+
+    return 0;
+}
