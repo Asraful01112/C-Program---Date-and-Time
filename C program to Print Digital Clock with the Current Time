@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <time.h>
+#include <windows.h>
+
+int main() {
+    while (1) {
+        system("cls"); 
+
+        time_t now;
+        time(&now);
+
+        struct tm *current = localtime(&now);
+
+        int hour = current->tm_hour;
+        int min  = current->tm_min;
+        int sec  = current->tm_sec;
+
+        char period[3];
+        int displayHour = hour;
+
+        if (hour == 0) {
+            displayHour = 12;
+            snprintf(period, sizeof(period), "AM");
+        } else if (hour == 12) {
+            displayHour = 12;
+            snprintf(period, sizeof(period), "PM");
+        } else if (hour > 12) {
+            displayHour = hour - 12;
+            snprintf(period, sizeof(period), "PM");
+        } else {
+            snprintf(period, sizeof(period), "AM");
+        }
+
+        printf("\n\n\t  DIGITAL CLOCK\n");
+        printf("\t-------------------\n");
+        printf("\t   %02d:%02d:%02d %s\n", displayHour, min, sec, period);
+        printf("\t-------------------\n");
+
+        Sleep(1000); 
+    }
+
+    return 0;
+}
